@@ -1,0 +1,58 @@
+<!DOCTYPE>
+<html lang='en'>
+<head>
+    <title> Loader example </title>
+    <style>
+        .loading-gif {
+            max-width: 500px;
+        }
+
+        .pre-loader {
+            position: fixed;
+            z-index: 100; /** make sure this is the highest value compared to all other divs **/
+            top: 0;
+            left: 0;
+            background:#efd2d2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+            
+        }
+
+        .pre-loader.hidden {
+            animation: fadeOut 4s; /** change to 1s */
+            animation-fill-mode: forwards;
+        
+        }
+
+        @keyframes fadeOut {
+            100% {
+                opacity: 0;
+                visibility: hidden;
+
+            }
+        }
+    </style>
+</head>
+<body>
+<!--- Your content goes here -->
+
+<div class='pre-loader'>
+    <img class='loading-gif' alt='loading' src="favicon.png" style="border-radius: 50%;" width="20%"/>
+</div>
+
+<!-- js to hide preloader loading is done -->
+<script type='text/javascript'>
+    window.addEventListener('load', function () {
+        document.querySelector('.pre-loader').className += ' hidden';
+    });
+</script>
+<script var = document.grtElementById('loading');
+function myFunction(){
+    preloader.style.display = 'none';
+}
+></script>
+</body>
+</html>

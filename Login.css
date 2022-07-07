@@ -1,0 +1,36 @@
+button{    position: fixed;
+        text-decoration: none;
+        background-color:#ff4d4d;
+        border: 2px solid ;
+        color: white;
+            border-radius: 7px;
+        width: 200px;
+        padding: 10px 1px;
+        cursor: pointer;   
+        font-weight: bold;
+        top : 90%;
+        left: 43%;
+    
+        
+          
+    }
+
+   
+    h1{
+        text-align: center;
+        font-size: 80px;
+        
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+    h2{
+        text-align: center;
+        
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        
+    }
+img{
+ 
+   
+    padding-left: 37%;
+
+}
