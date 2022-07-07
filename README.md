@@ -1,6 +1,6 @@
-# Medical_Records_Miniproject
+# Decentralized Medical Storage
 
 
 
 
-[medical_record_project](hospital.html)
+[Decentralized Medical Storage](hospital.html)
