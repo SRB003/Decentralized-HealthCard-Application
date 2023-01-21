@@ -1,0 +1,201 @@
+<html>
+<head>
+	
+<title>Register Doctor </title>
+
+<link rel="icon" href="Img/favicon.png">
+
+</head>
+<link rel="stylesheet" href="style.css">
+
+   
+		
+		<div class="topnav" id="myTopnav">
+			<a href="hospital.html" class="active" style="color: black;">Hospital Registration</a>
+			<a href="doctor.html" >Doctor Registration</a>
+			<a href="patient.html">Patient Registration</a>
+			<a href="examine_details.html">Examine Details</a>
+		
+			
+		  </div>      
+        <h1>Doctor Registration</h1>
+        <script src="https://cdn.jsdelivr.net/npm/web3@1.2.8/dist/web3.js"></script>
+    <script>	
+	
+	var account;
+	window.addEventListener('load', async () => {
+
+	
+		if (typeof window.ethereum !== 'undefined') { 
+			console.log("MetaMask is Available :) !"); 
+			}
+			
+		
+		if (window.ethereum) {
+			window.web3 = new Web3(ethereum);
+			
+			
+			ethereum.autoRefreshOnNetworkChange = false;
+			
+			
+			const accounts = await ethereum.enable();
+			account = accounts[0];
+				
+			}
+		
+		else if (window.web3) {
+			
+			window.web3 = new Web3(new Web3.providers.HttpProvider("https://sepolia.infura.io/v3/eebdd30b331e4c7ba9bc145f143f9fa7")); 
+			}
+		
+		else {
+			console.log('Non-Ethereum browser detected. Please install MetaMask');
+			}
+			
+			});
+    	
+        var abi = [
+	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint16",
+				"name": "doctor_id",
+				"type": "uint16"
+			}
+		],
+		"name": "retreive_doctor_details",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint16",
+				"name": "doctor_id",
+				"type": "uint16"
+			},
+			{
+				"internalType": "string",
+				"name": "_doctor_name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_doctor_specialisation",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_doctor_ph_no",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "_doctor_address",
+				"type": "string"
+			}
+		],
+		"name": "store_doctor_details",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}
+]
+        var contractaddress = '0x4970645AD40CC6fEd5c764084232CB476730640c';
+        
+        function add_details() {
+            var myContract = new web3.eth.Contract(abi,contractaddress, {from: account, gasPrice: '5000000', gas: '500000'});
+			var ds1 = document.getElementById("spec").value;
+			var ds2 = document.getElementById("pno").value;
+			var ds3 = document.getElementById("addr").value;
+            var tname = document.getElementById("name1").value;
+            var id = document.getElementById("id1").value;
+             var result = myContract.methods.store_doctor_details(id,tname,ds1,ds2,ds3).send(function (err, result) {
+               
+                if (err) { console.log(err); }
+               
+                });
+        }
+		function show_details() {
+            var myContract = new web3.eth.Contract(abi,contractaddress, {from: account, gasPrice: '5000000', gas: '500000'});
+            var idd = document.getElementById("tid").value;
+             var result = myContract.methods.retreive_doctor_details(idd).call(function (err, result) {
+               
+                if (err) { console.log(err); }
+                if (result) { 
+                    document.getElementById("get_name").innerHTML = result[0];
+					document.getElementById("get_spec").innerHTML = result[1];
+					document.getElementById("get_pno").innerHTML = result[2];
+					document.getElementById("get_addr").innerHTML = result[3];
+                }
+               
+                });
+        }
+        </script>
+<div >
+       <img src="Img/4-removebg-preview.png", width="350px">
+</div>
+        <h2>Register Doctor</h2>
+		
+    <form>
+		<div>
+		<table style="width:25%"> 
+            <tr>
+			<td>Enter Doctor Id:</td>
+			<td><input type="text" id="id1" name="id1" placeholder="Doctor UID"></td>
+		  </tr>
+            <tr>
+			<td> Doctor Name:</td>
+			<td><input type="text" id="name1" name="name1" placeholder="Name"> </td>
+		  </tr>
+		  <tr>
+			<td>Doctor Specification:</td>
+			<td><input type="text" id="spec" name="spec" placeholder="Any specification"></td>
+		  </tr>
+		   
+		   <tr>
+			<td>Doctor Phone Number:</td>
+			<td><input type="text" id="pno" name="pno" placeholder="Mobile No"></td>
+		  </tr>
+            <tr>
+			<td>Doctor Address:</td>
+			<td><input type="text" id="addr" name="addr" placeholder="Address"></td>
+		  </tr>
+           
+		  <tr>
+		  <td><input type="button" onclick="add_details()" value="Register"></td>
+		  </tr>
+		</table>
+		</div>
+	</form>
+	
+        <h3>To get details of a doctor  <a href="doctor_details.html">Click Here</a></h3>
+    </body>
+</html>
