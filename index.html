@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+  <link rel="icon" href="Img/favicon.png">
+  <link rel="stylesheet" href="Login/style.css" />
+  <title>Decentralized HealthCard</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="forms-container">
+      <div class="signin-signup">
+        <form action="#" class="sign-in-form">
+
+          <div class="input-field">
+
+
+          </div>
+<img src="img/metamask (1).gif" style="height: 350px;">
+          <button id="loginButton" onclick="" class="btn solid">Login</button>
+          <script>
+            var loginBtn = document.getElementById('loginButton');
+            loginBtn.addEventListener('click', function() {
+             
+              if (typeof window.ethereum === 'undefined') {
+                alert('Please install MetaMask and refresh the page.');
+                return;
+              }
+             
+              window.ethereum.enable()
+                .then(function() {
+                  alert('You have been logged in.');
+                  
+                  window.location.href = 'hospital.html';
+                })
+                .catch(function(error) {
+                  console.error(error);
+                  alert('An error occurred while trying to log in. Please try again.');
+                });
+            });
+          </script>
+        </body>
+        </html>
+        </form>
+        
+    </div>
+  </div>
+
+  <div class="panels-container">
+    <div class="panel left-panel">
+      <div class="content">
+        
+        <p>
+          <font size="6" style="color: black;">
+            <b>
+              HEALTHCARD APPLICATION</font>
+            </b> <br>
+            <font size="4" style="color: black;">
+            Revolutionizing healthcare through decentralized technology secure and accessible medical records on the
+            web
+          </font>
+        </p>
+       
+      </div>
+      <img src="img/images__2_-removebg-preview (1).png" class="image" />
+    </div>
+    <div class="panel right-panel">
+
+    </div>
+
+  </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>

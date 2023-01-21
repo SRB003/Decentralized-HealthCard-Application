@@ -1,0 +1,202 @@
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Register Hospital</title>
+<link rel="icon" href="Img/favicon.png">
+
+<link rel="stylesheet" href="style.css">
+<link rel="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<div class="topnav" id="myTopnav">
+	<a href="hospital.html" class="active" style="color: black;">Hospital Registration</a>
+	<a href="doctor.html" >Doctor Registration</a>
+	<a href="patient.html">Patient Registration</a>
+	<a href="examine_details.html">Examine Details</a>
+
+	
+  </div>
+  
+  
+  				
+	
+        <h1>Hospital Registration </h1>
+        <script src="https://cdn.jsdelivr.net/npm/web3@1.2.8/dist/web3.js"></script>
+    <script>	
+	
+	var account;
+	window.addEventListener('load', async () => {
+
+	
+		if (typeof window.ethereum !== 'undefined') { 
+			console.log("MetaMask is Available :) !"); 
+			}
+			
+		
+		if (window.ethereum) {
+			window.web3 = new Web3(ethereum);
+			
+			
+			ethereum.autoRefreshOnNetworkChange = false;
+			
+
+			const accounts = await ethereum.enable();
+			account = accounts[0];
+				
+			}
+		
+		else if (window.web3) {
+			//window.web3 = new Web3(web3.currentProvider);
+			window.web3 = new Web3(new Web3.providers.HttpProvider("https://sepolia.infura.io/v3/eebdd30b331e4c7ba9bc145f143f9fa7")); 
+			}
+		
+		else {
+			alert('Non-Ethereum browser detected. Please install MetaMask');
+			}
+			
+			});
+    	
+        var abi = [
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "hospital_id",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "_hospital_name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_hospital_address",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_hospital_spec",
+				"type": "string"
+			}
+		],
+		"name": "store_doctor_details",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "hospital_id",
+				"type": "uint256"
+			}
+		],
+		"name": "retreive_hospital_details",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]
+        var contractaddress = '0x237175907AF3E1e874331d34EB37c504652Dc705';
+        
+        function add_details() {
+            var myContract = new web3.eth.Contract(abi,contractaddress,{from: account, gasPrice: '5000000', gas: '5000000'});
+			var ds1 = document.getElementById("addr").value;
+			var ds2 = document.getElementById("spec").value;
+            var tname = document.getElementById("name1").value;
+            var id = document.getElementById("id1").value;
+             var result = myContract.methods.store_doctor_details(id,tname,ds1,ds2).send(function (err, result) {
+               
+                if (err) { console.log(err); }
+                if (result) { document.getElementById("result").innerHTML = result; }
+               
+                });
+        }
+		function show_details() {
+            var myContract = new web3.eth.Contract(abi,contractaddress, {from: account, gasPrice: '5000000', gas: '500000'});
+            var idd = document.getElementById("tid").value;
+             var result = myContract.methods.retreive_hospital_details(idd).call(function (err, result) {
+               
+                if (err) { console.log(err); }
+                if (result) { 
+                    document.getElementById("get_name").innerHTML = result[0];
+					document.getElementById("get_addr").innerHTML = result[1];
+					document.getElementById("get_spec").innerHTML = result[2];
+                }
+               
+                });
+        }
+        function del_details() {
+            var myContract = new web3.eth.Contract(abi,contractaddress, {from: account, gasPrice: '5000000', gas: '500000'});
+            var bid = document.getElementById("bid1").value;
+             var result = myContract.methods.burnMyToken(bid).send(function (err, result) {
+               
+                if (err) { console.log(err); }
+                });
+        }
+        </script>
+
+       
+        <h2>Register Hospital</h2>
+		<div>
+		<img src="Img/hospital_img-removebg-preview.png" width="300px" style="content: none;">
+		</div>
+
+
+    <form>
+
+			<div>
+		<table style="width:25%"> 
+            <tr>
+				
+			<td>Enter Hospital Id:</td>
+			<td><input type="text" id="id1" name="id1" placeholder="Hospital UID"></td>
+		  </tr>
+            <tr>
+			<td> Hospital Name:</td>
+			<td><input type="text" id="name1" name="name1" placeholder="Name "></td>
+		  </tr>
+            <tr>
+			<td>Hospital Address:</td>
+			<td><input type="text" id="addr" name="addr" placeholder="Address"></td>
+		  </tr>
+            <tr>
+			<td>Hospital Specification:</td>
+			<td><input type="text" id="spec" name="spec" placeholder="Any Specification"></td>
+		  </tr>
+		  <tr>
+			
+		  <td><input type="button" onclick="add_details()" value="Register"></td>
+		  </tr>
+		</table>
+		</div>
+		
+	
+	</form>
+        <h3>To get details of a hospital  <a href="hospital_details.html">Click Here</a></h3>
+		
+    </body>
+</html>
