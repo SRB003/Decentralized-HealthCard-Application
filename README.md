@@ -23,3 +23,4 @@ Smart Contract Our DApp utilizes a smart contract that is deployed on the Ethere
 * Infura
 * Metamask
 * Web3.js
+* Remix IDE
