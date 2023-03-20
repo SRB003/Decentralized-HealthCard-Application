@@ -1,4 +1,4 @@
-# Hackanova_Disruptors
+
 
 # Welcome to our Decentralized HealthCard Application repository
 This repository contains the code for our decentralized application (DApp) which is made with Infura, HTML, CSS, and JavaScript. Our DApp allows you to interact with the Ethereum blockchain without the need to run a local node.
